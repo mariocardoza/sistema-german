@@ -6,12 +6,12 @@
                             <label for="" class="col-md-4 control-label">Categoría</label>
 
                                 <div class="col-md-6">
-                                  <select class="form-control" id="cat_id">
+                                  <select class="chosen-select-width" id="cat_id">
                                     <option value="">Seleccione una categoria</option>
                                   </select>
                                 </div>
                                 <div class="col-md-2">
-                                  <button type="button" class="btn btn-primary" name="button" id="" data-toggle="modal" data-target="#btncategoria"><span class="glyphicon glyphicon-plus"></span></button>
+                                  <button type="button" class="btn btn-primary" name="button" id="" data-toggle="modal" data-target="#modalcategoria"><span class="glyphicon glyphicon-plus"></span></button>
                                 </div>
                         </div>
 

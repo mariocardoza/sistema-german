@@ -26,7 +26,10 @@ class PresupuestoController extends Controller
      public function __construct()
      {
          $this->middleware('auth');
+         //Session::forget('presupuestos');
      }
+
+    
 
     public function index(Request $request)
     {
@@ -44,7 +47,7 @@ class PresupuestoController extends Controller
           return view('presupuestos.index',compact('presupuestos','existe','proyecto'));
         }else{
           $existe=true;
-          return view('presupuestos.index',compact('presupuestos','existe'));
+          return view('presupuestos.index',compact('presupuestos','existe','proyecto'));
         }
 
       }
@@ -85,40 +88,6 @@ class PresupuestoController extends Controller
                 ]);
             }
 
-        }
-    }
-
-    public function guardarCategoria(CategoriaRequest $request)
-    {
-        if($request->Ajax())
-        {
-            try{
-                Categoria::create($request->All());
-                return response()->json([
-                    'mensaje' => 'exito'
-                ]);
-            }catch(\Exception $e){
-                return response()->json([
-                    'mensaje' => $e->getMessage()
-                ]);
-            }
-        }
-    }
-
-    public function guardarDescripcion(Request $request)
-    {
-        if($request->Ajax())
-        {
-            try{
-                Catalogo::create($request->All());
-                return response()->json([
-                    'mensaje' => 'exito'
-                ]);
-            }catch(\Exception $e){
-                return response()->json([
-                    'mensaje' => $e->getMessage()
-                ]);
-            }
         }
     }
 

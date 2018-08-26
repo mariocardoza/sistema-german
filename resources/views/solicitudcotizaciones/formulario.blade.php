@@ -15,7 +15,7 @@
                 <div class="form-group">
                     <label for="" class="col-md-4 control-label">Proceso o proyecto: </label>
                     <div class="col-md-6">
-                        {{Form::text('',$proyecto->nombre,['class' => 'form-control'])}}
+                        {{Form::textarea('',$proyecto->nombre,['class' => 'form-control','rows'=>2,'readonly'])}}
                         {{Form::hidden('proyecto',$proyecto->id,['class' => 'form-control','id' => 'proyecto'])}}
                     </div>
                 </div>
@@ -34,21 +34,21 @@
                     <div class="col-md-6">
                       <select name="formapago" id="formapago" class="chosen-select-width">
                           <option value="">Seleccione una forma de pago...</option>
-                          @foreach($formapagos as $formapago)
-                          <option value="{{$formapago->id}}">{{$formapago->nombre}}</option>
-                          @endforeach
                       </select>
+                  </div>
+                  <div class="col-md-2">
+                    <button type="button" class="btn btn-primary" id="" data-toggle="modal" data-target="#modalformapago"><span class="glyphicon glyphicon-plus"></span></button>
                   </div>
               </div>
               <div class="form-group">
                   <label for="" class="col-md-4 control-label">Unidad solicitante: </label>
                   <div class="col-md-6">
                       <select name="unidad" id="unidad" class="chosen-select-width">
-                          <option value="">Seleccione una unidad</option>
-                          @foreach($unidades as $unidad)
-                          <option>{{$unidad->nombre_unidad}}</option>
-                          @endforeach
+                          <option value="">Seleccione una unidad administrativa</option>
                       </select>
+                  </div>
+                  <div class="col-md-2">
+                    <button type="button" class="btn btn-primary" id="" data-toggle="modal" data-target="#modalunidad"><span class="glyphicon glyphicon-plus"></span></button>
                   </div>
               </div>
 
@@ -63,14 +63,14 @@
                 <div class="form-group">
                   <label for="fecha_limite" class="col-md-4 control-label">Fecha limite para cotizar</label>
                   <div class="col-md-6">
-                    {!!Form::text('fecha_limite',null,['class' => 'form-control unafecha'])!!}
+                    {!!Form::text('fecha_limite',null,['class' => 'form-control unafecha','id'=>'fecha_limite'])!!}
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label for="tiempo_entrega" class="col-md-4 control-label">Tiempo de entrega</label>
                   <div class="col-md-6">
-                    {!!Form::text('tiempo_entrega',null,['class' => 'form-control'])!!}
+                    {!!Form::text('tiempo_entrega',null,['class' => 'form-control','id'=>'tiempo_entrega'])!!}
                   </div>
                 </div>
 
@@ -86,3 +86,41 @@
                     </thead>
                     <tbody id="cuerpo"></tbody>
                 </table>
+
+                <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalformapago" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="row">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Registrar una forma de pago
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                </div>
+                                <div class="panel-body">
+                                    @include('formapagos.formulario')
+                                </div>
+                                <div class="panel-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" id="guardarformapago" class="btn btn-success">Agregar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalunidad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="row">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Registrar una forma de pago
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                </div>
+                                <div class="panel-body">
+                                    @include('unidades.formulario')
+                                </div>
+                                <div class="panel-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" id="guardarunidad" class="btn btn-success">Agregar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>

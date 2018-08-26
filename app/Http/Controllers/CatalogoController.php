@@ -45,8 +45,22 @@ class CatalogoController extends Controller
      */
     public function store(Request $request)
     {
-        Catalogo::create($request->All());
-        return redirect('catalogos')->with('mensaje','Catalogo registrado');
+        if($request->Ajax())
+        {
+          try{
+              Catalogo::create($request->All());
+              return response()->json([
+                  'mensaje' => 'exito'
+              ]);
+          }catch(\Exception $e){
+              return response()->json([
+                  'mensaje' => $e->getMessage()
+              ]);
+          }
+        }else{
+          Catalogo::create($request->All());
+          return redirect('catalogos')->with('mensaje','Catalogo registrado');
+        }
     }
 
     /**
@@ -101,6 +115,7 @@ class CatalogoController extends Controller
 
     public function baja($cadena)
     {
+        try{
         $datos = explode("+",$cadena);
         $id = $datos[0];
         $motivo = $datos[1];
@@ -112,6 +127,9 @@ class CatalogoController extends Controller
         $catalogo->save();
         bitacora('Dió de baja catálogo');
         return redirect('/catalogos')->with('mensaje','Catálogo dado de baja');
+    }catch(\Exception $e){
+        return redirect('/catalogos')->with('mensaje','Error, no se puede dar de baja');
+    }
     }
 
     public function alta($id)

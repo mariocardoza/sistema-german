@@ -1,6 +1,6 @@
 <ul class="sidebar-menu">
         <li class="header">Menú Principal</li>
-        @if(Auth::user()->cargo == 1)
+        @if(Auth()->user()->hasRole('admin'))
         <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Bitacora</span>
@@ -47,13 +47,13 @@
           </ul>
         </li>
         @endif
-        @if(Auth::user()->cargo == 2)
+        @if(Auth()->user()->hasRole('uaci'))
         @include('menu.uaci')
         @endif
-        @if(Auth::user()->cargo == 3)
+        @if(Auth()->user()->hasRole('tesoreria'))
           @include('menu.tesoreria')
         @endif
-        @if(Auth::user()->cargo == 4)
+        @if(Auth()->user()->hasRole('catastro'))
           @include('menu.ryct')
         @endif
         <li class="treeview">
@@ -89,10 +89,7 @@
             <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
           </ul>
         </li>
-        
-        <li>
-          <a href="{{ url('contribuyentes') }}"><i class="fa fa-book"></i> <span>Contribuyentes</span></a>
-        </li>
+        <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentación</span></a></li>
         <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Categoria;
 use App\Bitacora;
+use App\Http\Requests\FondocatRequest;
 
 class CategoriaController extends Controller
 {
@@ -41,10 +42,25 @@ class CategoriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FondocatRequest $request)
     {
-        Categoria::create($request->All());
-        return redirect('categorias')->with('mensaje','Categoría registrada');
+        if($request->Ajax())
+        {
+          try{
+              $categoria = Categoria::create($request->All());
+              return response()->json([
+                  'mensaje' => 'exito',
+                  'data' => $categoria
+              ]);
+          }catch(\Exception $e){
+              return response()->json([
+                  'mensaje' => 'error'
+              ]);
+          }
+        }else{
+          Categoria::create($request->All());
+          return redirect('categorias')->with('mensaje','Categoría registrada');
+        }
     }
 
     /**
